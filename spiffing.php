@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * The Queen's Stylesheet
  *
  * Brits, take control of the web. Spiffing allows you to write your CSS and stylesheets 
@@ -19,21 +19,21 @@
  * Class is never to be forgotten when compiling such royal stylesheets, therefore, it is
  * with utter urgence that one begin to compile like so:
  *
- * $css 	= new spiffing($royalty);
+ * $css 	= new spiffing($royalty, false);
  *
  * As you can see, one has to use but the finest, and simplest, techniques in order to achieve
  * their goal. Finally, we shall output our stylesheet for our friends across the pond:
  *
- * $css->output();
+ * $css->process();
  *
  * Perfect!
  * 
- * @authors 	@idiot, @kapooht
+ * @authors 	@kapooht & @idiot
  * @license 	☺ License (http://licence.visualidiot.com)
  *
  */
 	class spiffing {
-		/*
+		/**
 		 * The dictionary which has been made into a more accessible array.
 		 *
 		 * @var		array
@@ -41,59 +41,61 @@
 		 */
 		public $dictionary 		= array(
 			// Queen's English	// Primitive English from our stateside friends from across the pond.
-			'colour'		=> 'color',
-			'grey'			=> 'gray',
-			'!please'		=> '!important',
+			'colour'			=> 'color',
+			'grey'				=> 'gray',
+			'!please'			=> '!important',
 			'transparency'		=> 'opacity',
-			'centre'		=> 'center',
-			'plump'			=> 'bold',
+			'centre'			=> 'center',
+			'plump'				=> 'bold',
 			'photograph'		=> 'image',
 			'capitalise'		=> 'capitalize'
 		);
-		/*
+		/**
 		 * The 'fail gracefully' variable allows the user to load the 'NOT FOUND' header if, well, nothing is found.
 		 * If, however, this is set to TRUE, then nothing will be shown at all.
 		 *
 		 * @var 	boolean
 		 * @access 	public
 		 */
-		public $fail_gracefully		= FALSE;
-		/*
+		public $fail_gracefully	= FALSE;
+		/**
 		 * Did the operation fail? We shall see.
 		 * This should be set to FALSE by default.
 		 *
-		 * @var		boolean
 		 * @access	private
+		 * @var		boolean
 		 */
 		private $we_failed		= FALSE;
-		/*
+		/**
 		 * The URL hook. Check out the .htaccess for further customisation.
 		 *
-		 * @var		string
 		 * @access	private
+		 * @var		string
 		 */
 		private $hook			= 'file=';
-		/*
+		/**
 		 * The file variable
 		 *
+		 * @access 	public
 		 * @var		string
-		 * @access	public
 		 */
 		public $file;
-		/*
+		/**
 		 * Perfectly British CSS right here
 		 *
-		 * @var 	string
 		 * @access 	public
+		 * @var 	string
 		 */
 		public $css;
-		/*
+		/**
 		 * Constructor
 		 *
-		 * @param 	string
+		 * @access 	public
+		 * @param 	string	Raw CSS
+		 * @param 	string	Should requesting the class automatically return CSS? Default TRUE;
 		 * @return 	void
 		 */
-		function __construct($raw = '') {
+		function __construct( $raw = '', $auto_output = true ) {
 			if ( !empty( $raw )) {
 				$this->css = $raw;
 			} else if ( isset( $_SERVER ) ) {
@@ -109,13 +111,15 @@
 				// No spiffing CSS was found.
 				$this->not_found();
 			}
-			$this->process();
+			if( $auto_output == true ) {
+				$this->process();
+			}
 		}
-		/*
+		/**
 		 * Magic really.
 		 *
-		 * @param	void
 		 * @access 	public
+		 * @param	void
 		 * @return 	string
 		 */
 		public function process() {
@@ -146,11 +150,11 @@
 			echo $processed;
 			exit;
 		}
-		/*
+		/**
 		 * Set a custom header
 		 *
-		 * @param	string
 		 * @access 	private
+		 * @param	string
 		 * @return 	void
 		 */
 		private function set_header($header) {
@@ -159,11 +163,11 @@
 				header( $header );
 			}
 		}
-		/*
+		/**
 		 * Create a 404 function, since we do that a lot.
 		 *
-		 * @param	void
 		 * @access 	private
+		 * @param	void
 		 * @return 	void
 		 */
 		private function not_found() {
@@ -177,17 +181,17 @@
 				exit;
 			}
 		}
-		/*
+		/**
 		 * A public access of the failure variable.
 		 *
-		 * @param 	void
 		 * @access 	public
+		 * @param 	void
 		 * @return 	boolean
 		 */
 		public function did_we_fail() {
 			return $this->we_failed;
 		}
-		/*
+		/**
 		 * Deconstructor
 		 */
 		function __deconstruct() {
