@@ -3,7 +3,7 @@
 Why, hello, dear visitor! If you're the kind of person predisposed to converse about the weather over a round of tea and crumpets, then you'll appreciate Spiffing: a CSS preprocessor with only one job — to correct the spelling errors prevalent in the language.
 
 ## Requirements:
-PHP 5.2+, well-spelt CSS and Apache (if you want clean URLs).
+PHP 5.3+, well-spelt CSS and Apache (if you want clean URLs).
 
 ## To install:
 1. Download Spiffing (it's the ZIP button up there), and upload to your server.

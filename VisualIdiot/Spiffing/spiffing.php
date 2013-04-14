@@ -32,6 +32,8 @@
  * @license 	☺ License (http://licence.visualidiot.com)
  *
  */
+	namespace VisualIdiot\Spiffing;
+
 	class spiffing {
 		/**
 		 * The dictionary which has been made into a more accessible array.
